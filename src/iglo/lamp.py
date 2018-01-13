@@ -1,3 +1,4 @@
+import math
 import socket
 from iglo.helpers import Helpers
 
@@ -10,6 +11,9 @@ CODE_COLOUR           = 161
 CODE_RGB_BRIGHTNESS   = 162
 CODE_POWER            = 163
 CODE_WHITE_BRIGHTNESS = 167
+
+MIN_KELVIN = 2700
+MAX_KELVIN = 6500
 
 class Lamp(object):
   """
@@ -28,7 +32,7 @@ class Lamp(object):
     self._port = port
     self._on = True
     self._mode = MODE_WHITE
-    self._white = 255
+    self._white = MAX_KELVIN
     self._rgb = (0, 0, 0)
     self._brightness = {
       MODE_WHITE: 200,
@@ -43,10 +47,15 @@ class Lamp(object):
     data = [CODE_POWER, self._id, on_data]
     self._send(data)
 
-  def white(self, whiteness):
+  def white(self, kelvin):
+    """Supports between 2700K and 6500K white
+    :type kelvin int:
+    """
+    whiteness = int(((kelvin - MIN_KELVIN) * 255)/(MAX_KELVIN-MIN_KELVIN))
+    whiteness = max(min(whiteness,255),0)
     data = [CODE_COLOUR, self._id, 255 - whiteness, whiteness]
     self._mode = MODE_WHITE
-    self._white = whiteness
+    self._white = kelvin
     self._on = True
     self._send(data)
 
@@ -85,3 +94,11 @@ class Lamp(object):
     sock.send(data_bytes)
     sock.close()
     sock = None
+
+  @property
+  def min_kelvin(self):
+    return MIN_KELVIN
+
+  @property
+  def max_kelvin(self):
+    return MAX_KELVIN
