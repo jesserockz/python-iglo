@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='iglo',
-      version='1.1.3',
+      version='1.2.5',
       description='Control iGlo based RGB lights',
       url='http://github.com/jesserockz/python-iglo',
       author='Jesse Hills',
