@@ -94,7 +94,6 @@ class Lamp(object):
     self._effect = ''
     self._send(data)
 
-  @property
   def state(self):
     return {
       'on': self._on,
