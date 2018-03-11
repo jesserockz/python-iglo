@@ -125,12 +125,11 @@ class Lamp(object):
   def max_kelvin(self):
     return MAX_KELVIN
 
-  @property
   def effect_list(self):
     return list(EFFECTS.keys())
 
   def effect(self, effect):
-    if effect in self.effect_list:
+    if effect in self.effect_list():
       data = [CODE_EFFECT, self._id, EFFECTS[effect]]
       self._mode = MODE_EFFECT
       self._effect = effect
