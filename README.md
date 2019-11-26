@@ -1,5 +1,16 @@
 # Python iGlo
 
+## Unmaintained
+The iGlo range of lights are based on ESP8266 chips and are
+therefore compatible with a vast number of open source firmwares. 
+As you can't retrieve the state from the stock firmware I advise you
+flash an alternative.
+ 
+ 
+----------
+
+
+
 A library to control iGlo based RGB lights.
 
 I am not sure if getting the current state from the light is supported,
